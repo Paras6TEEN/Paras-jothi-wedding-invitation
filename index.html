@@ -95,6 +95,12 @@ footer{text-align:center;padding:2rem 1rem 3rem;color:var(--mute);font-style:ita
 50%{--c1:#0B1F4D;--c2:#1F43A0}
 75%{--c1:#053B30;--c2:#10705A}}
 @media(prefers-reduced-motion:reduce){.hero,.family{animation:none}}
+.cd{display:flex;justify-content:center;gap:.6rem;margin:1.8rem auto 0;max-width:30rem}
+.cd div{flex:1;min-width:0;padding:.8rem .2rem .6rem;border:1px solid rgba(227,176,75,.55);border-radius:8px;background:rgba(0,0,0,.22)}
+.cd b{display:block;font-size:clamp(1.8rem,8vw,2.6rem);font-weight:600;line-height:1.1;color:var(--gold);font-variant-numeric:tabular-nums}
+.cd span{display:block;font-size:.85rem;letter-spacing:.04em;opacity:.9}
+.cd i{display:block;font-style:normal;font-size:.8rem;opacity:.8}
+.cdnote{margin-top:.8rem;font-style:italic;opacity:.85}
 a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 @media(max-width:480px){.ev{grid-template-columns:2.2rem 1fr;}.time{grid-column:2;margin-top:-.4rem;font-size:1.15rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -111,6 +117,13 @@ a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
   <div class="rule"></div>
   <p class="dates">30 November – 3 December 2026</p>
   <p class="place">Gulmohar City, Dera Bassi</p>
+  <div class="cd" id="cd" role="timer" aria-label="Countdown to 2 December 2026">
+    <div><b id="cd-d">--</b><span>Days <i class="hi">दिन</i></span></div>
+    <div><b id="cd-h">--</b><span>Hours <i class="hi">घंटे</i></span></div>
+    <div><b id="cd-m">--</b><span>Minutes <i class="hi">मिनट</i></span></div>
+    <div><b id="cd-s">--</b><span>Seconds <i class="hi">सेकंड</i></span></div>
+  </div>
+  <p class="cdnote" id="cdnote">until the wedding day · 2 December 2026</p>
 </header>
 
 <section class="bless">
@@ -194,6 +207,18 @@ o.type="sine";o.frequency.value=notes[Math.floor(r()*notes.length)];
 g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.12,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+2.2);
 o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+2.3)})(k)}}catch(x){}}
 document.querySelectorAll(".chime").forEach(function(c){c.addEventListener("click",ring)});
+})();
+</script>
+<script>
+(function(){
+var T=new Date("2026-12-02T00:00:00+05:30").getTime(),E=function(i){return document.getElementById(i)};
+function p(n){return n<10?"0"+n:""+n}
+function tick(){var d=T-Date.now();
+if(d<=0){E("cd").style.display="none";E("cdnote").textContent="Today is the day! 🎉 Join us as we celebrate.";return}
+var s=Math.floor(d/1000);
+E("cd-d").textContent=Math.floor(s/86400);E("cd-h").textContent=p(Math.floor(s%86400/3600));
+E("cd-m").textContent=p(Math.floor(s%3600/60));E("cd-s").textContent=p(s%60)}
+tick();setInterval(tick,1000);
 })();
 </script>
 </body>
